@@ -3,186 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Silvio Henrique da Silva Cariolano</title>
+    <title>Voz Única - Serviços de Locução Profissional</title>
+    <!-- Carregamento do Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        /* Configuração de fonte global e cores customizadas */
+        :root {
+            --primary-color: #ef4444; /* red-500 */
+            --secondary-color: #fca5a5; /* red-300 */
+            --dark-bg: #1f2937; /* gray-800 */
+        }
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* gray-50 */
+            color: #1f2937;
         }
-        .bg-hero {
-            background-color: #1a202c;
+        .text-shadow-custom {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .accent-color {
-            color: #a72626; /* Um tom de vinho/bordô inspirado no seu colete */
-        }
-        .bg-accent {
-            background-color: #a72626;
+        /* Efeito de rolagem suave */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="antialiased">
 
-    <!-- Container Principal -->
-    <div class="container mx-auto p-4 md:p-8">
-        
-        <!-- Header -->
-        <header class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row items-center">
-            <!-- Imagem de Perfil -->
-            <div class="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-md mb-4 md:mb-0 md:mr-8 flex-shrink-0">
-                <img src="https://placehold.co/200x200/e2e8f0/333333?text=SC" alt="Foto de Silvio Cariolano" class="w-full h-full object-cover">
-            </div>
-            
-            <!-- Informações Principais -->
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl md:text-5xl font-bold text-gray-900">SILVIO HENRIQUE DA SILVA CARIOLANO</h1>
-                <h2 class="text-xl md:text-2xl font-semibold accent-color mt-1">Mixologista e Criador de Experiências</h2>
-                
-                <!-- Contatos -->
-                <div class="mt-4 flex flex-wrap justify-center md:justify-start gap-4 text-sm">
-                    <a href="mailto:silviocariolano@gmail.com" class="flex items-center text-gray-600 hover:accent-color transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        silviocariolano@gmail.com
+    <!-- Navegação (Menu Fixo) -->
+    <nav class="bg-white shadow-lg fixed top-0 w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo/Nome -->
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 font-extrabold text-xl text-red-500 tracking-wider">
+                        VOZ ÚNICA
                     </a>
-                     <a href="#" class="flex items-center text-gray-600 hover:accent-color transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        (81) 8739-1707
+                </div>
+                <!-- Links de Navegação -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <!-- Adicionando link para o locutor na navegação -->
+                    <a href="#locutor" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-red-500 transition duration-300">
+                        O Locutor
                     </a>
-                    <a href="https://instagram.com/silviocariolano" target="_blank" class="flex items-center text-gray-600 hover:accent-color transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 8.25H10.5v5.25h3V8.25zM10.5 13.5V18s-1.5 0-1.5-1.5v-3h1.5zm3 0h3v-3s0-1.5-1.5-1.5H13.5v4.5zM9 8.25s-1.5 0-1.5 1.5V18h3v-5.25H9v-4.5zM15 8.25s1.5 0 1.5 1.5V18h-3v-5.25h3v-4.5zM12 3a9 9 0 100 18 9 9 0 000-18z"></path></svg>
-                        @silviocariolano
+                    <a href="#servicos" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-red-500 transition duration-300">
+                        Serviços
+                    </a>
+                    <a href="#cursos" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-red-500 transition duration-300">
+                        Cursos
+                    </a>
+                    <a href="#precos" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-red-500 transition duration-300">
+                        Preços
+                    </a>
+                    <a href="#portfolio" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-red-500 transition duration-300">
+                        Portfólio
+                    </a>
+                    <a href="#contato" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-white bg-red-500 rounded-full hover:bg-red-600 transition duration-300 px-4">
+                        Contato
                     </a>
                 </div>
             </div>
-        </header>
+        </div>
+    </nav>
 
-        <!-- Conteúdo Principal -->
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-            
-            <!-- Coluna da Esquerda -->
-            <div class="lg:col-span-1 flex flex-col gap-8">
-                <!-- Sobre Mim -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold border-b-2 border-gray-200 pb-2 mb-4">Sobre Mim</h3>
-                    <p class="text-gray-700 leading-relaxed">
-                        Sou pernambucano e atualmente resido em Jaboatão. Sou bartender/mixologista atuando há mais de 4 anos em atendimento Premium. Possuo habilidade na criação de coquetéis autorais e xaropes/licores. Apaixonado em servir boas experiências, seja na vida ou trabalho, priorizo boas relações através da comunicação.
+    <main class="pt-16">
+
+        <!-- Seção Principal (Hero) -->
+        <section id="hero" class="bg-gray-800 text-white py-20 md:py-32">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <div class="bg-red-500 text-xs font-bold uppercase py-1 px-3 rounded-full inline-block mb-4 shadow-lg">
+                    Voz Grave e Autoridade
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight text-shadow-custom">
+                    A Voz Perfeita para o Seu Projeto
+                </h1>
+                <p class="text-xl sm:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
+                    Transforme suas ideias em áudio de alta qualidade com um locutor versátil e profissional. Seja comercial, narrativa ou institucional, a qualidade é garantida.
+                </p>
+                <a href="#locutor" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-xl transition duration-300 transform hover:scale-105">
+                    Conheça a Voz
+                </a>
+            </div>
+        </section>
+        
+        <!-- Seção de Apresentação do Locutor -->
+        <section id="locutor" class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="md:flex md:items-center md:space-x-12">
+                    <!-- Coluna da Imagem (Imagem do Usuário) -->
+                    <div class="flex-shrink-0 mb-8 md:mb-0 md:w-1/3 flex justify-center">
+                        <!-- Imagem do Locutor Silvio Cariolano -->
+                        <img src="Imagem do WhatsApp de 2025-08-15 à(s) 12.56.52_8f90b738.jpg" alt="Foto do Locutor Silvio Cariolano" class="w-full h-auto object-cover rounded-2xl shadow-2xl ring-4 ring-red-100 max-w-xs md:max-w-none">
+                    </div>
+
+                    <!-- Coluna da Apresentação -->
+                    <div class="md:w-2/3">
+                        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-800 border-b pb-2 border-red-500/50">
+                            Conheça o Locutor
+                        </h2>
+                        <h3 class="text-2xl font-semibold mb-6 text-red-600">
+                            Perfil Vocal: Entonação Grave e Imponente
+                        </h3>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            Olá! Eu sou a voz por trás do Voz Única. Minha especialidade é a **locução com entonação grave e marcante**, ideal para projetos que exigem seriedade, imponência e credibilidade.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed bg-red-50 p-4 rounded-xl border border-red-200 font-medium">
+                            Se você busca uma voz grave, profunda e capaz de transmitir autoridade — **no timbre clássico e confiável, similar ao do lendário Cid Moreira** — você está no lugar certo.
+                        </p>
+                        <p class="mt-4 text-md text-gray-600">
+                            Com anos de experiência em estúdio, garanto excelência técnica, interpretação adaptada e alta qualidade de áudio para qualquer projeto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Cursos e Treinamentos (NOVA) -->
+        <section id="cursos" class="py-20 bg-gray-900 text-white">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-red-400">
+                    Cursos e Treinamentos
+                </h2>
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Aprenda as técnicas essenciais de locução e domine a arte da voz.
+                </p>
+
+                <!-- Cartão do Curso em Destaque -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl border-b-4 border-red-500 max-w-lg mx-auto">
+                    <div class="text-red-500 text-5xl mb-4">📢</div>
+                    <h3 class="text-2xl font-bold mb-3">Dominando a Voz Grave: Autoridade e Timbre</h3>
+                    <p class="text-gray-400 mb-6">
+                        Curso intensivo para quem deseja aprimorar a projeção vocal, ganhar profundidade e utilizar a entonação grave para transmitir mais credibilidade em apresentações, narrações ou locução.
+                    </p>
+                    <ul class="text-left text-gray-300 space-y-2 mb-8 list-disc list-inside">
+                        <li>Técnicas de respiração e apoio diafragmático.</li>
+                        <li>Exercícios para aprofundamento do timbre e ressonância.</li>
+                        <li>Interpretação de textos institucionais e comerciais.</li>
+                        <li>Dicas de gravação e tratamento de áudio.</li>
+                    </ul>
+                    <a href="#contato" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                        Quero Saber Mais Sobre o Curso!
+                    </a>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-10">
+                    Novos cursos e workshops serão adicionados em breve!
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção de Serviços -->
+        <section id="servicos" class="py-20 bg-gray-100">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-800">Meus Serviços de Locução</h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Ofereço uma ampla gama de estilos vocais, adaptando minha voz grave para atender exatamente ao tom e emoção que seu projeto exige.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Cartão 1: Comercial -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-red-100">
+                        <div class="text-red-500 text-4xl mb-4">🎤</div>
+                        <h3 class="text-xl font-semibold mb-3">Locução Comercial</h3>
+                        <p class="text-gray-600">Voz energética e persuasiva para anúncios de rádio, TV e internet. Ideal para campanhas de marketing.</p>
+                    </div>
+
+                    <!-- Cartão 2: Narrativa -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-red-100">
+                        <div class="text-red-500 text-4xl mb-4">📖</div>
+                        <h3 class="text-xl font-semibold mb-3">Narrativa e E-Learning</h3>
+                        <p class="text-gray-600">Tom calmo e envolvente para audiolivros, tutoriais, documentários e módulos de treinamento.</p>
+                    </div>
+
+                    <!-- Cartão 3: Institucional -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-red-100">
+                        <div class="text-red-500 text-4xl mb-4">🏢</div>
+                        <h3 class="text-xl font-semibold mb-3">Vídeos Institucionais</h3>
+                        <p class="text-gray-600">Voz clara, profissional e confiável para apresentações corporativas, vídeos explicativos e mensagens de marca.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Preços (Tabela de Locução) -->
+        <section id="precos" class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-800">
+                    Preços e Categorias
+                </h2>
+
+                <!-- Tabela de Preços Responsiva -->
+                <div class="overflow-x-auto shadow-xl rounded-xl">
+                    <table class="min-w-full divide-y divide-red-200 bg-white">
+                        <thead class="bg-red-500">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-white uppercase tracking-wider rounded-tl-xl">
+                                    Tema de Locução
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center text-sm font-medium text-white uppercase tracking-wider">
+                                    Curto (até 30s)
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center text-sm font-medium text-white uppercase tracking-wider">
+                                    Médio (31s - 60s)
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-center text-sm font-medium text-white uppercase tracking-wider rounded-tr-xl">
+                                    Longo (61s - 120s)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <!-- Linha Comercial -->
+                            <tr class="hover:bg-red-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-semibold text-gray-900">
+                                    Comercial (Ads)
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 100</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 180</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 300</span>
+                                </td>
+                            </tr>
+                            <!-- Linha Narrativa -->
+                            <tr class="bg-gray-50 hover:bg-red-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-semibold text-gray-900">
+                                    Narrativa / E-learning
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 80</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 150</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 250</span>
+                                </td>
+                            </tr>
+                            <!-- Linha Institucional -->
+                            <tr class="hover:bg-red-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-semibold text-gray-900">
+                                    Institucional / Corporativo
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 120</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 220</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-xl font-bold text-red-600">R$ 380</span>
+                                </td>
+                            </tr>
+                            <!-- Linha Personalizado -->
+                            <tr class="bg-gray-50 hover:bg-red-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-semibold text-gray-900">
+                                    Tema Personalizado (>120s)
+                                </td>
+                                <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="text-lg font-bold text-gray-700">Consulte-me para Orçamento</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-10">
+                    <p class="text-sm text-gray-500 italic">
+                        * Os valores incluem gravação, edição básica e entrega em formato WAV/MP3. Direitos de uso podem ser negociados separadamente.
                     </p>
                 </div>
-                
-                <!-- Habilidades -->
-                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold border-b-2 border-gray-200 pb-2 mb-4">Habilidades</h3>
-                    
-                    <div class="mb-4">
-                        <h4 class="font-bold text-lg accent-color">Avançadas/Técnicas</h4>
-                        <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                            <li>Mixologia e atendimento de luxo</li>
-                            <li>Criação de Coquetéis e Xaropes</li>
-                            <li>Barismo e sommelier para harmonizações premium</li>
-                        </ul>
-                    </div>
+            </div>
+        </section>
 
-                    <div class="mb-4">
-                        <h4 class="font-bold text-lg accent-color">Soft Skills</h4>
-                        <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                            <li>Boa comunicação e relações interpessoais</li>
-                            <li>Aprendizado ágil em cenários de alta pressão</li>
-                            <li>Trabalho em equipe colaborativo</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold text-lg accent-color">Idiomas</h4>
-                        <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                            <li>Inglês: Intermediário (B1)</li>
-                            <li>Espanhol: Básico</li>
-                            <li>Libras: Intermediário (B2)</li>
-                        </ul>
+        <!-- Seção de Portfólio -->
+        <section id="portfolio" class="py-20 bg-gray-100">
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-gray-800">
+                    Portfólio: Serviços Realizados
+                </h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Aqui, você encontrará exemplos de trabalhos finalizados, demonstrando a qualidade e a versatilidade do meu serviço de locução.
+                </p>
+
+                <!-- Área do Portfólio (Atualmente Vazia) -->
+                <div class="bg-white p-12 rounded-xl border-4 border-dashed border-red-300/50 shadow-inner">
+                    <svg class="mx-auto h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h3 class="mt-2 text-xl font-medium text-gray-900">Portfólio em Construção</h3>
+                    <p class="mt-1 text-gray-500">
+                        Ainda estou no início da minha jornada de serviços! Em breve, esta seção será preenchida com exemplos de locução comercial, narrativa e institucional.
+                    </p>
+                    <div class="mt-6">
+                        <a href="#contato" class="text-red-500 hover:text-red-600 font-medium">
+                            Seja o primeiro a ser incluído no meu portfólio! &rarr;
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Coluna da Direita -->
-            <div class="lg:col-span-2 flex flex-col gap-8">
-                <!-- Experiência Profissional -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold border-b-2 border-gray-200 pb-2 mb-4">Experiência Profissional</h3>
-                    <div class="space-y-6">
-                        
-                        <!-- Item de Experiência -->
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                             <div class="absolute w-4 h-4 bg-accent rounded-full -left-2 top-1 border-2 border-white"></div>
-                             <p class="text-sm font-semibold text-gray-500">Julho/2024 - Agosto/2025</p>
-                            <h4 class="text-lg font-bold">Atendente/Bartender</h4>
-                            <p class="text-md font-semibold text-gray-600">Novotel Recife Marina</p>
-                            <p class="mt-1 text-gray-700">Inicialmente atendente, fui promovido para treinar e gerenciar o bar através do barismo e mixologia.</p>
-                        </div>
-
-                        <!-- Item de Experiência -->
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                             <div class="absolute w-4 h-4 bg-accent rounded-full -left-2 top-1 border-2 border-white"></div>
-                             <p class="text-sm font-semibold text-gray-500">Março/2024 - Junho/2024</p>
-                            <h4 class="text-lg font-bold">Garçom/Atendente</h4>
-                            <p class="text-md font-semibold text-gray-600">Gran Pasta restaurante Italiano</p>
-                            <p class="mt-1 text-gray-700">Treinamento de garçons e atendentes visando fidelidade, aumentando ticket médio em 15%.</p>
-                        </div>
-                        
-                        <!-- Item de Experiência -->
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                             <div class="absolute w-4 h-4 bg-accent rounded-full -left-2 top-1 border-2 border-white"></div>
-                             <p class="text-sm font-semibold text-gray-500">Novembro/2023 - Fevereiro/2024</p>
-                            <h4 class="text-lg font-bold">Garçom</h4>
-                            <p class="text-md font-semibold text-gray-600">Firetha Carne e Hambúrgueres</p>
-                            <p class="mt-1 text-gray-700">Atendimento premium; fidelizei clientes através de experiências/harmonizações (aumento de 20-25%).</p>
-                        </div>
-
-                        <!-- Item de Experiência -->
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                             <div class="absolute w-4 h-4 bg-accent rounded-full -left-2 top-1 border-2 border-white"></div>
-                             <p class="text-sm font-semibold text-gray-500">Outubro/2023 - Março/2020</p>
-                            <h4 class="text-lg font-bold">Recepcionista</h4>
-                            <p class="text-md font-semibold text-gray-600">Lupi Pizzeria & Restaurante</p>
-                            <p class="mt-1 text-gray-700">Gerenciamento de reservas e responsável pelo atendimento de clientes estrangeiros e inclusivos (aumento de 15-20%).</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Formação -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold border-b-2 border-gray-200 pb-2 mb-4">Formação</h3>
-                    <div class="space-y-4">
-                        
-                         <div>
-                            <p class="text-sm font-semibold text-gray-500">2025</p>
-                            <h4 class="text-lg font-bold">Curso de Bartender Profissional</h4>
-                            <p class="text-md font-semibold text-gray-600">A&B Academy</p>
-                        </div>
-                        
-                         <div>
-                            <p class="text-sm font-semibold text-gray-500">2025</p>
-                            <h4 class="text-lg font-bold">Curso de Mixologia</h4>
-                            <p class="text-md font-semibold text-gray-600">A&B Academy</p>
-                        </div>
-
-                        <div>
-                            <p class="text-sm font-semibold text-gray-500">2025</p>
-                            <h4 class="text-lg font-bold">Atendimento de Luxo</h4>
-                            <p class="text-md font-semibold text-gray-600">A&B Academy</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </main>
+        </section>
         
-        <!-- Footer -->
-        <footer class="text-center mt-8 text-gray-500 text-sm">
-            <p>&copy; 2025 Silvio Henrique da Silva Cariolano. Todos os direitos reservados.</p>
-        </footer>
-    </div>
+        <!-- Seção de Contato Atualizada -->
+        <section id="contato" class="py-20 bg-gray-800 text-white">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Pronto para Começar?</h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    Entre em contato diretamente para discutir seu projeto ou solicitar um orçamento personalizado.
+                </p>
+                
+                <div class="bg-gray-700 p-8 rounded-xl shadow-2xl space-y-6">
+                    
+                    <!-- Contato por Email -->
+                    <div class="flex flex-col items-center p-4 bg-gray-600 rounded-lg shadow-inner">
+                        <p class="text-sm font-semibold text-gray-300 mb-2 uppercase">E-mail para Orçamentos</p>
+                        <!-- O link mailto: está correto. O problema de não abrir o app pode ser na configuração do dispositivo do usuário. -->
+                        <a href="mailto:Silviocariolano@gmail.com" class="text-2xl font-bold text-red-400 hover:text-red-300 transition duration-300 flex items-center">
+                            <!-- Ícone de Email (usando SVG simples) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Silviocariolano@gmail.com
+                        </a>
+                        <p class="text-xs text-gray-400 mt-2">
+                            (Se o link não abrir, copie o endereço acima.)
+                        </p>
+                    </div>
+
+                    <!-- Contato por WhatsApp -->
+                    <div class="flex flex-col items-center p-4 bg-gray-600 rounded-lg shadow-inner">
+                        <p class="text-sm font-semibold text-gray-300 mb-2 uppercase">WhatsApp (Silvio Cariolano)</p>
+                        <a href="https://wa.me/5581998372002" target="_blank" class="text-2xl font-bold text-green-400 hover:text-green-300 transition duration-300 flex items-center">
+                            <!-- Ícone de Telefone/WhatsApp (usando SVG simples) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            (81) 99837-2002
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <p class="mt-8 text-md text-gray-400">
+                    Sinta-se à vontade para enviar o seu script e detalhes do projeto. Respondo o mais rápido possível!
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2025 Voz Única - Serviços de Locução Profissional. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
