@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silvio Cariolano - Mixologista | Portfólio & CV</title>
+    <!-- Carrega o Tailwind CSS para estilização fácil e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1f2937; /* Texto principal escuro */
+            
+            /* Novo Background Interativo/Profissional */
+            /* Imagem placeholder para um tema de bar/tecnologia com nome abreviado */
+            background-image: url('https://placehold.co/1920x1080/e0e0e0/a00000?text=S.H.S.C.'); 
+            background-size: cover;
+            background-attachment: fixed; /* Efeito parallax leve */
+            background-position: center;
+            background-color: #f5f5f5;
+        }
+
+        /* Ajuste para garantir que o placeholder do BG seja legível em mobile, mesmo que cortado */
+        @media (max-width: 640px) {
+            body {
+                background-size: 150% auto; /* Aumenta um pouco para garantir que o texto não fique muito grande */
+            }
+        }
+
+        /* Paleta de Cores Atualizada (Light Mode) */
+        .bg-primary-light { background-color: #f5f5f5; }
+        .text-dark { color: #1f2937; }
+        .text-accent { color: #cc0000; }
+        .bg-highlight { background-color: #a00000; }
+        .border-highlight { border-color: #a00000; }
+        .hover\:bg-highlight:hover { background-color: #a00000; }
+
+        /* Estilo da Imagem de Perfil */
+        .profile-image {
+            object-fit: cover;
+            object-position: top;
+            max-height: 350px; 
+            width: 100%;
+        }
+
+        /* Efeito de destaque para cards (sombra mais discreta) */
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out;
+            background-color: #ffffff; /* Fundo do card branco puro para contraste */
+            color: #374151; /* Texto dentro do card */
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sidebar - Abre pela ESQUERDA */
+        .sidebar {
+            transition: transform 0.4s ease-in-out;
+            transform: translateX(-100%); /* Esconde para a esquerda */
+            width: 90%; 
+            max-width: 320px; 
+            z-index: 50; 
+            left: 0; /* Ancoragem na esquerda */
+        }
+        .sidebar.open {
+            transform: translateX(0); /* Abre deslizando para a direita */
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative; 
+            z-index: 20;
+        }
+        
+        /* Overlay para clarear a imagem de fundo */
+        .bg-overlay {
+            background-color: rgba(255, 255, 255, 0.85); 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10; 
+        }
+
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-light': '#f5f5f5',
+                        'dark-text': '#1f2937',
+                        'highlight': '#a00000', /* Bordô mais escuro */
+                        'accent': '#cc0000',  /* Vermelho de acento */
+                    }
+                }
+            }
+        }
+
+        // Função para mudar a aba ativa (Cursos)
+        function changeTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            const selectedContent = document.getElementById(tabName);
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('bg-highlight', 'text-white', 'border-highlight');
+                button.classList.add('bg-white', 'border-gray-300', 'text-dark', 'hover:text-highlight');
+            });
+
+            const selectedButton = document.getElementById(`btn-${tabName}`);
+            if (selectedButton) {
+                selectedButton.classList.add('bg-highlight', 'border-highlight', 'text-white');
+                selectedButton.classList.remove('bg-white', 'border-gray-300', 'text-dark', 'hover:text-highlight');
+            }
+        }
+
+        // Função para rolar para a seção
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Fecha o menu hamburger após a rolagem 
+            toggleSidebar();
+        }
+        
+        // Função para alternar o menu lateral
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar-menu');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            sidebar.classList.toggle('open');
+            backdrop.classList.toggle('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa a primeira aba de cursos
+            changeTab('especialidades-cursos');
+        });
+    </script>
+</head>
+<body class="text-dark min-h-screen">
+    
+    <!-- Overlay para clarear a imagem de fundo e garantir legibilidade (z-index 10) -->
+    <div class="bg-overlay"></div>
+
+    <!-- BARRA SUPERIOR E BOTÃO HAMBURGER (Visível em todas as telas - z-index 40) -->
+    <header class="sticky top-0 bg-white/90 border-b border-gray-200 p-4 flex justify-between items-center z-40 shadow-sm">
+        
+        <!-- Botão Hamburger no Lado Esquerdo -->
+        <button id="hamburger-button" onclick="toggleSidebar()" class="focus:outline-none p-1 rounded-full hover:bg-gray-100 transition duration-150">
+            <svg class="w-8 h-8 text-highlight" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        
+        <!-- Título no Lado Direito -->
+        <h1 class="text-xl font-bold text-accent">Silvio Cariolano</h1>
+    </header>
+
+    <!-- Overlay de Fundo (Para fechar o menu) (z-index 40) -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black opacity-40 hidden z-40" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Menu (Abre pela Esquerda - z-index 50) -->
+    <aside id="sidebar-menu" class="sidebar fixed top-0 h-full bg-white z-50 p-6 shadow-2xl border-r border-gray-200">
+        <div class="flex flex-col h-full">
+            
+            <!-- Botão de Fechar -->
+            <button onclick="toggleSidebar()" class="absolute top-4 right-4 text-dark focus:outline-none p-1 rounded-full hover:bg-gray-100 transition duration-150">
+                <svg class="w-8 h-8 text-highlight" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Título no Menu -->
+            <div class="mt-4 pb-6 border-b border-gray-200">
+                 <h2 class="text-xl font-extrabold tracking-tight text-dark">
+                    Navegação
+                </h2>
+                <h3 class="text-sm text-accent font-light">
+                    S.H.S.C.
+                </h3>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="mt-6 space-y-3 font-semibold text-lg text-dark flex-grow">
+                <button onclick="scrollToSection('sobre')" class="block nav-link text-left w-full p-2 rounded hover:bg-highlight hover:text-white transition duration-200">01. Sobre Mim</button>
+                <button onclick="scrollToSection('experiencia')" class="block nav-link text-left w-full p-2 rounded hover:bg-highlight hover:text-white transition duration-200">02. Experiência Profissional</button>
+                <button onclick="scrollToSection('habilidades')" class="block nav-link text-left w-full p-2 rounded hover:bg-highlight hover:text-white transition duration-200">03. Habilidades</button>
+                <button onclick="scrollToSection('formacao')" class="block nav-link text-left w-full p-2 rounded hover:bg-highlight hover:text-white transition duration-200">04. Cursos & Formação</button>
+            </nav>
+            
+            <!-- Links de Contato na parte inferior da Sidebar -->
+            <div id="contato" class="space-y-4 text-sm pt-6 border-t border-gray-200">
+                 <p class="font-bold text-dark text-base">Fale Comigo!</p>
+                
+                <!-- Botão Enviar Email Aprimorado -->
+                <a href="mailto:silviocariolano@gmail.com" class="flex flex-col items-center justify-center p-3 rounded-lg bg-accent text-white font-bold shadow-md hover:bg-highlight transition duration-200">
+                    <div class="flex items-center mb-1">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                        Enviar Email
+                    </div>
+                    <span class="text-xs font-light opacity-80 mt-1">silviocariolano@gmail.com</span>
+                </a>
+
+                 <!-- Botão WhatsApp (com novo número) -->
+                <a href="https://wa.me/5581998372002?text=Ol%C3%A1%2C%20Silvio!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." 
+                   target="_blank" 
+                   class="flex flex-col items-center justify-center p-3 rounded-lg bg-green-500 text-white font-bold shadow-md hover:bg-green-600 transition duration-200">
+                    <div class="flex items-center mb-1">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 3.81 2.45 7.15 5.8 8.4V19l1.76-.9c.47.28 1 .45 1.54.45 3.03 0 5.5-2.47 5.5-5.5 0-3.03-2.47-5.5-5.5-5.5-3.03 0-5.5 2.47-5.5 5.5 0 1.25.42 2.4 1.12 3.32l-.6 1.76c-.07.2-.07.42 0 .62.1.2.29.35.5.35h.01c.2 0 .4-.07.54-.2l1.65-1.04c.83.5 1.77.78 2.76.78 3.03 0 5.5-2.47 5.5-5.5s-2.47-5.5-5.5-5.5z"></path></svg>
+                        WhatsApp
+                    </div>
+                    <span class="text-xs font-light opacity-80 mt-1">(81) 99837-2002</span>
+                </a>
+
+                <!-- Link LinkedIn Atualizado -->
+                <a href="https://www.linkedin.com/in/silvio-cariolano-323414302/" 
+                   target="_blank" 
+                   class="flex flex-col items-center justify-center p-3 rounded-lg bg-blue-600 text-white font-bold shadow-md hover:bg-blue-700 transition duration-200">
+                    <div class="flex items-center mb-1">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-5 17h-2v-6h-2v6H9V9h2v1.5c.34-.64.79-1.1 1.34-1.46C12.89 8.68 13.56 8.5 14.2 8.5c1.45 0 2.5 1.05 2.5 2.5V19zM6.5 7c.83 0 1.5-.67 1.5-1.5S7.33 4 6.5 4 5 4.67 5 5.5 5.67 7 6.5 7z"></path></svg>
+                        LinkedIn
+                    </div>
+                    <span class="text-xs font-light opacity-80 mt-1">Silvio cariolano</span>
+                </a>
+
+                <p class="text-xs text-center text-gray-400 mt-4">
+                    Jaboatão, PE - Brasil
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Layout Principal (z-index 20) -->
+    <div class="main-content p-6">
+
+        <!-- Coluna de Conteúdo Principal -->
+        <main class="space-y-16">
+
+            <!-- APRESENTAÇÃO/INÍCIO (Seção implícita) -->
+            <section id="apresentacao" class="pt-8 pb-4">
+                <div class="rounded-xl card-shadow overflow-hidden mb-8 border-t-4 border-highlight">
+                    <!-- Caminho da imagem de perfil corrigido, usando a foto enviada -->
+                    <img src="edited smile.jpg" 
+                         alt="Foto de Silvio Henrique da Silva Cariolano no bar" 
+                         class="profile-image mx-auto" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x350/a00000/ffffff?text=FOTO+DE+PERFIL';">
+                    <div class="p-6 text-center">
+                        <h1 class="text-4xl font-extrabold tracking-tight text-dark mb-1">
+                            SILVIO CARIOLANO
+                        </h1>
+                        <h2 class="text-2xl text-accent font-light">
+                            Mixologista & Criador de Experiências
+                        </h2>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SOBRE MIM -->
+            <section id="sobre">
+                <h3 class="text-3xl font-bold mb-4 border-b-2 pb-2 border-highlight text-dark">
+                    01. Sobre Mim
+                </h3>
+                <div class="p-6 rounded-xl card-shadow text-gray-700">
+                    <p class="text-lg leading-relaxed">
+                        Sou pernambucano e atualmente resido em Jaboatão. Sou **bartender/mixologista** atuando há mais de **4 anos em atendimento Premium**.
+                    </p>
+                    <p class="text-lg leading-relaxed mt-4">
+                        Possuo habilidade na **criação de coquetéis autorais e xaropes/licores**. Apaixonado em servir boas experiências, seja na vida ou trabalho, priorizo boas relações através da comunicação eficaz. Meu foco é sempre elevar o padrão de serviço e fidelizar o cliente através de momentos memoráveis.
+                    </p>
+                </div>
+            </section>
+
+            <!-- EXPERIÊNCIA PROFISSIONAL -->
+            <section id="experiencia">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 border-highlight text-dark">
+                    02. Experiência Profissional
+                </h3>
+
+                <div class="space-y-8">
+                    <!-- Experiência 1 -->
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-accent">
+                        <p class="text-sm font-light text-highlight mb-1">Julho/2024 até Agosto/2025</p>
+                        <h4 class="text-xl font-semibold text-dark">ATENDENTE/BARTENDER</h4>
+                        <p class="text-lg text-gray-600 mb-2">Novotel Recife Marina</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li>Inicialmente atendente, fui promovido para treinar e gerenciar o bar através do barismo e mixologia.</li>
+                            <li>Responsável por elevar o padrão do serviço de bar.</li>
+                        </ul>
+                    </div>
+                    <!-- Experiência 2 -->
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-accent">
+                        <p class="text-sm font-light text-highlight mb-1">Março/2024 até Junho/2024</p>
+                        <h4 class="text-xl font-semibold text-dark">GARÇOM/ATENDENTE</h4>
+                        <p class="text-lg text-gray-600 mb-2">Gran Pasta restaurante Italiano</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li>Treinamento de garçons e atendentes visando fidelidade do cliente.</li>
+                            <li>Resultado: Aumento de ticket médio em **15%**.</li>
+                        </ul>
+                    </div>
+                    <!-- Experiência 3 -->
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-accent">
+                        <p class="text-sm font-light text-highlight mb-1">Novembro/2023 até Fevereiro/2024</p>
+                        <h4 class="text-xl font-semibold text-dark">GARÇOM</h4>
+                        <p class="text-lg text-gray-600 mb-2">Firetha Carne e Hambúrgueres</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li>Atendimento premium e fidelização de clientes através de experiências/harmonizações.</li>
+                            <li>Fidelização de clientes na faixa de **20% a 25%**.</li>
+                        </ul>
+                    </div>
+                    <!-- Experiência 4 -->
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-accent">
+                        <p class="text-sm font-light text-highlight mb-1">Março/2020 até Outubro/2023</p>
+                        <h4 class="text-xl font-semibold text-dark">RECEPCIONISTA</h4>
+                        <p class="text-lg text-gray-600 mb-2">Lupi Pizzeria & Restaurante</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li>Gerenciamento de reservas.</li>
+                            <li>Responsável pelo atendimento de clientes estrangeiros e inclusivos (**15% a 20%** do fluxo).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- HABILIDADES -->
+            <section id="habilidades">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 border-highlight text-dark">
+                    03. Habilidades
+                </h3>
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    <!-- Habilidades Técnicas -->
+                    <div class="p-6 rounded-xl card-shadow border-t-4 border-highlight">
+                        <h4 class="text-xl font-semibold text-accent mb-4">Avançadas/Técnicas</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Mixologia e Atendimento de Luxo</li>
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Criação de Coquetéis e Xaropes</li>
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Barismo e Sommelier para Harmonizações Premium</li>
+                        </ul>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="p-6 rounded-xl card-shadow border-t-4 border-highlight">
+                        <h4 class="text-xl font-semibold text-accent mb-4">Soft Skills</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Boa Comunicação e Relações Interpessoais</li>
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Trabalho em Equipe Colaborativo</li>
+                            <li class="flex items-center"><span class="text-highlight mr-2 text-2xl">•</span> Aprendizado Ágil em Cenários de Alta Pressão</li>
+                        </ul>
+                    </div>
+
+                    <!-- Idiomas -->
+                    <div class="p-6 rounded-xl card-shadow border-t-4 border-highlight">
+                        <h4 class="text-xl font-semibold text-accent mb-4">Idiomas</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex justify-between items-center">
+                                Inglês
+                                <span class="bg-gray-200 text-dark px-3 py-1 text-xs rounded-full border border-highlight">Intermediário B1</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                Espanhol
+                                <span class="bg-gray-200 text-dark px-3 py-1 text-xs rounded-full border border-highlight">Básico</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                Libras
+                                <span class="bg-gray-200 text-dark px-3 py-1 text-xs rounded-full border border-highlight">Intermediário B2</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CURSOS & FORMAÇÃO -->
+            <section id="formacao" class="pb-8">
+                <h3 class="text-3xl font-bold mb-6 border-b-2 pb-2 border-highlight text-dark">
+                    04. Cursos & Formação
+                </h3>
+
+                <!-- Navegação de Abas para Cursos -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button id="btn-especialidades-cursos" onclick="changeTab('especialidades-cursos')" class="tab-button px-4 py-2 rounded-full border-2 text-sm font-semibold transition duration-300">
+                        Especialidades (Bar)
+                    </button>
+                    <button id="btn-atendimento-cursos" onclick="changeTab('atendimento-cursos')" class="tab-button px-4 py-2 rounded-full border-2 text-sm font-semibold transition duration-300">
+                        Serviço & Hospitalidade
+                    </button>
+                    <button id="btn-tecnologia-cursos" onclick="changeTab('tecnologia-cursos')" class="tab-button px-4 py-2 rounded-full border-2 text-sm font-semibold transition duration-300">
+                        Tecnologia & IA
+                    </button>
+                </div>
+
+                <!-- Conteúdo das Abas -->
+
+                <!-- Especialidades (Mixologia e Barismo) -->
+                <div id="especialidades-cursos" class="tab-content space-y-6">
+                    <h4 class="text-2xl font-semibold text-accent mb-4">Mixologia, Barismo e Sommelier</h4>
+                    
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">CURSO DE BARTENDER PROFISSIONAL</p>
+                        <p class="text-sm text-gray-500">A&B ACADEMY - 2025</p>
+                        <p class="mt-2 text-gray-600 text-sm">Foco em técnicas avançadas de preparo, gestão de bar e hospitalidade.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">CURSO DE MIXOLOGIA</p>
+                        <p class="text-sm text-gray-500">A&B ACADEMY - 2025</p>
+                        <p class="mt-2 text-gray-600 text-sm">Especialização na criação de coquetéis autorais, infusões, xaropes e licores caseiros.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">SOMMELIER E HARMONIZAÇÃO BÁSICA</p>
+                        <p class="text-sm text-gray-500">Escola de Sommeliers (Mockup) - 2024</p>
+                        <p class="mt-2 text-gray-600 text-sm">Conhecimento em vinhos e outras bebidas para harmonização com pratos de alta gastronomia.</p>
+                    </div>
+                </div>
+
+                <!-- Atendimento & Serviço -->
+                <div id="atendimento-cursos" class="tab-content hidden space-y-6">
+                    <h4 class="text-2xl font-semibold text-accent mb-4">Atendimento Premium e Gestão de Fluxo</h4>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">ATENDIMENTO DE LUXO E HOSPITALIDADE</p>
+                        <p class="text-sm text-gray-500">A&B ACADEMY - 2025</p>
+                        <p class="mt-2 text-gray-600 text-sm">Focado em etiqueta, antecipação de necessidades do cliente e manutenção de um padrão de serviço premium.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">CURSO DE RECEPCIONISTA E GESTÃO DE RESERVAS</p>
+                        <p class="text-sm text-gray-500">Plataforma Horeca - 2023</p>
+                        <p class="mt-2 text-gray-600 text-sm">Treinamento completo em gerenciamento de filas, reservas e comunicação eficaz com a cozinha/salão.</p>
+                    </div>
+                    
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">COMUNICAÇÃO E VENDAS NO SETOR DE ALIMENTAÇÃO</p>
+                        <p class="text-sm text-gray-500">Plataforma XYZ - 2023</p>
+                        <p class="mt-2 text-gray-600 text-sm">Técnicas de comunicação interpessoal e estratégias para aumento de ticket médio e upsell.</p>
+                    </div>
+                </div>
+
+                <!-- Tecnologia/Outros -->
+                <div id="tecnologia-cursos" class="tab-content hidden space-y-6">
+                    <h4 class="text-2xl font-semibold text-accent mb-4">Imersão em Inovação e Ferramentas</h4>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">IMERSÃO EM INTELIGÊNCIA ARTIFICIAL (IA)</p>
+                        <p class="text-sm text-gray-500">Alura & Google - 2024 (Mockup)</p>
+                        <p class="mt-2 text-gray-600 text-sm">Fundamentos de IA e suas aplicações em otimização de processos de atendimento e marketing.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">LIBRAS (Língua Brasileira de Sinais)</p>
+                        <p class="text-sm text-gray-500">Nível Intermediário B2</p>
+                        <p class="mt-2 text-gray-600 text-sm">Habilidade essencial para atendimento inclusivo e comunicação com clientes surdos.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl card-shadow border-l-4 border-highlight">
+                        <p class="text-lg font-medium text-dark">INGLÊS E ESPANHOL</p>
+                        <p class="text-sm text-gray-500">Inglês: Intermediário B1 | Espanhol: Básico</p>
+                        <p class="mt-2 text-gray-600 text-sm">Capacidade de atender e gerenciar reservas de clientes estrangeiros.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
